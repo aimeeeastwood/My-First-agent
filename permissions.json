@@ -1,0 +1,6 @@
+{
+  "canReadFiles": false,
+  "canWriteFiles": false,
+  "canUseShell": false,
+  "canUseNetwork": true
+}
