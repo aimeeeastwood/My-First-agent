@@ -4,21 +4,18 @@ import { calculatorTool } from '@/app/api/chat/tools/calculator'
 
 export function getToolsForRoute(route: string) {
   switch (route) {
-    case 'web':
-      return {
-        fetchUrl: fetchUrlTool,
-        calculator: calculatorTool,
-      }
-
     case 'lore':
       return {
         readFile: readFileTool,
       }
 
-    case 'chat':
+    case 'web':
       return {
-        calculator: calculatorTool,
+        fetchUrl: fetchUrlTool,
       }
+
+    case 'chat':
+      return {}
 
     case 'safety':
       return {}

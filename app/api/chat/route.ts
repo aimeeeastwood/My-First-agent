@@ -1,9 +1,15 @@
 import { cassandraOrchestrator } from '@/app/agents/cassandra/orchestrator'
 
 export async function POST(req: Request) {
-  const body = await req.json()
+  try {
+    const body = await req.json()
 
-  const result = await cassandraOrchestrator(body.messages)
+    return await cassandraOrchestrator(body.messages)
+  } catch (error) {
+    console.error(error)
 
-  return Response.json(result)
+    return new Response('Server error', {
+      status: 500,
+    })
+  }
 }
