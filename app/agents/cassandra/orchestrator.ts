@@ -1,11 +1,28 @@
 import { streamText } from 'ai'
-
 import { routeMessage } from './router'
 import { selectModelForRoute } from './models'
 import { getToolsForRoute } from './tools'
 import { safetyCheck } from './policy/safetyCheck'
 
+function toModelMessages(messages: any[]) {
+  return messages
+    .filter((m) => m.role !== 'tool')
+    .map((m) => {
+      const text =
+        typeof m.content === 'string'
+          ? m.content
+          : (m.parts?.find((p: any) => p.type === 'text')?.text ?? '')
+
+      return {
+        role: m.role,
+        content: text,
+      }
+    })
+}
+
 export async function cassandraOrchestrator(messages: any[]) {
+  console.log('🔥 ORCHESTRATOR HIT')
+
   const last = messages[messages.length - 1]?.content ?? ''
 
   if (!safetyCheck(messages)) {
@@ -19,7 +36,7 @@ export async function cassandraOrchestrator(messages: any[]) {
 
   const result = streamText({
     model,
-    messages,
+    messages: toModelMessages(messages), // 👈 HERE
     tools,
   })
 

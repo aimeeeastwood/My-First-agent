@@ -1,8 +1,3 @@
-export async function webAgent(input: string) {
-  // later: fetchUrl tool only + sanitiser
-
-  return {
-    route: 'web',
-    output: `🌐 Web result for: ${input}`,
-  }
+export async function run(messages: any[]) {
+  return new Response('web agent placeholder')
 }

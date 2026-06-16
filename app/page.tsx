@@ -14,12 +14,7 @@ export default function Page() {
 
     if (!input.trim()) return
 
-    await sendMessage(
-      { text: input },
-      {
-        body: { model },
-      },
-    )
+    await sendMessage({ text: input })
 
     setInput('')
   }
@@ -49,11 +44,11 @@ export default function Page() {
           marginBottom: 16,
         }}
       >
-        {messages.map((message) => (
-          <div key={message.id} style={{ marginBottom: 12 }}>
+        {messages.map((message, i) => (
+          <div key={`${message.id}-${i}`} style={{ marginBottom: 12 }}>
             <strong>{message.role}:</strong>{' '}
-            {message.parts?.map((part, i) =>
-              part.type === 'text' ? <span key={i}>{part.text}</span> : null,
+            {message.parts?.map((part, j) =>
+              part.type === 'text' ? <span key={j}>{part.text}</span> : null,
             )}
           </div>
         ))}
