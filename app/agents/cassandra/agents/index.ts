@@ -4,7 +4,9 @@ import { run as safetyRun } from './safety'
 
 export type AgentName = 'chat' | 'lore' | 'safety'
 
-export function getAgent(name: AgentName) {
+type AgentFn = (messages: any[]) => Promise<Response>
+
+export function getAgent(name: AgentName): AgentFn {
   switch (name) {
     case 'chat':
       return chatRun
@@ -12,5 +14,7 @@ export function getAgent(name: AgentName) {
       return loreRun
     case 'safety':
       return safetyRun
+    default:
+      throw new Error(`Unknown agent: ${name}`)
   }
 }

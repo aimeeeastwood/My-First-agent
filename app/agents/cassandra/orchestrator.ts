@@ -14,6 +14,7 @@ function toModelMessages(messages: any[]) {
           : (m.parts?.find((p: any) => p.type === 'text')?.text ?? '')
 
       return {
+        id: m.id ?? crypto.randomUUID(), // ✅ FIX GOES HERE
         role: m.role,
         content: text,
       }
