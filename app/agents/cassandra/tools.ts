@@ -1,3 +1,4 @@
+import { searchKnowledgeTool } from '@/app/api/chat/tools/searchKnowledge'
 import { readFileTool } from '@/app/api/chat/tools/readFile'
 import { fetchUrlTool } from '@/app/api/chat/tools/fetchUrl'
 import { calculatorTool } from '@/app/api/chat/tools/calculator'
@@ -11,9 +12,7 @@ export function getToolsForRoute(route: Route) {
       }
 
     case 'lore':
-      return {
-        readFile: readFileTool,
-      }
+      return {} // NO TOOLS AT ALL
 
     case 'chat':
       return {
